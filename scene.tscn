@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyn483vwg3njo"]
+
+[ext_resource type="Script" path="res://scene.gd" id="1_3wd7b"]
+[ext_resource type="Script" path="res://movement.gd" id="1_e3agm"]
+[ext_resource type="Texture2D" uid="uid://byaqn53o2fyom" path="res://hellen_animations.png" id="2_6hiwk"]
+[ext_resource type="Script" path="res://camera_controller.gd" id="2_i4pl7"]
+[ext_resource type="Texture2D" uid="uid://bocun3rlaxigw" path="res://placeholder_texture.png" id="3_a836c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l5keb"]
+
+[node name="Scene" type="Node2D"]
+script = ExtResource("1_3wd7b")
+
+[node name="CameraController" type="Node2D" parent="."]
+script = ExtResource("2_i4pl7")
+
+[node name="FullResCamera" type="Camera2D" parent="CameraController"]
+position = Vector2(960, 540)
+process_callback = 0
+
+[node name="ViewportCamera" type="Camera2D" parent="CameraController"]
+texture_filter = 1
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 641.0
+offset_bottom = 361.0
+scale = Vector2(3, 3)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(642, 362)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+offset_left = -96.0
+offset_top = -66.0
+offset_right = 922.0
+offset_bottom = 544.0
+texture = ExtResource("3_a836c")
+stretch_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(360, 229)
+polygon = PackedVector2Array(-16, -72, 64, -48, -32, 88, -64, -24)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="SubViewportContainer/SubViewport"]
+motion_mode = 1
+script = ExtResource("1_e3agm")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/CharacterBody2D"]
+texture = ExtResource("2_6hiwk")
+region_enabled = true
+region_rect = Rect2(31, 4, 18, 25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/CharacterBody2D"]
+shape = SubResource("CircleShape2D_l5keb")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="RandomSprite" type="Sprite2D" parent="UI"]
+position = Vector2(370, 479)
+scale = Vector2(4.4648, 5.58786)
+texture = ExtResource("2_6hiwk")
