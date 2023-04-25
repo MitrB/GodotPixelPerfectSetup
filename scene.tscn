@@ -16,27 +16,21 @@ script = ExtResource("2_i4pl7")
 
 [node name="FullResCamera" type="Camera2D" parent="CameraController"]
 position = Vector2(960, 540)
-process_callback = 0
+zoom = Vector2(6, 6)
 
 [node name="ViewportCamera" type="Camera2D" parent="CameraController"]
-texture_filter = 1
-process_callback = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 641.0
-offset_bottom = 361.0
-scale = Vector2(3, 3)
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 1282.0
+offset_bottom = 722.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
-canvas_item_default_texture_filter = 0
 size = Vector2i(642, 362)
 render_target_update_mode = 4
 
@@ -68,5 +62,13 @@ shape = SubResource("CircleShape2D_l5keb")
 
 [node name="RandomSprite" type="Sprite2D" parent="UI"]
 position = Vector2(370, 479)
+rotation = 1.67552
 scale = Vector2(4.4648, 5.58786)
 texture = ExtResource("2_6hiwk")
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 90.0
+offset_top = 25.0
+offset_right = 212.0
+offset_bottom = 51.0
+text = "READABLE TEXT"
